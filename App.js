@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -7,27 +7,73 @@ import {
   Image,
   TouchableOpacity 
 } from 'react-native';
+class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      palavra: '',
+      img: require('./src/biscoito.png')
+    }
+    this.frases = [
+      'Viver é a coisa mais rara do mundo. A maioria das pessoas apenas existe.',
+      'Não existe um caminho para a felicidade. A felicidade é o caminho.',
+      'O que sabemos é uma gota; o que ignoramos é um oceano.',
+      'Muitas pessoas perdem as pequenas alegrias enquanto aguardam a grande felicidade.',
+      'Feliz aquele que transfere o que sabe e aprende o que ensina.',
+      'Para mim, a capacidade de sorrir é uma das mais belas características do ser humano.',
+      'A persistência é o caminho do êxito.',
+      'Se apaixone pela sua existência.',
+      'O fraco jamais perdoa: o perdão é uma das características do forte.'
+    ]
+    this.sortear = this.sortear.bind(this);
+  }
 
-export default function App() {
-  return (
-    <View style={styles.container}>
+  sortear(){
+    // alert('teste');
+    let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+    this.setState({
+      img: require('./src/loading.gif') 
+    })
+    // setTimeout(() => {
+      
+    // }, 3000)
+
+    setTimeout(() => {
+      this.setState({
+        palavra: '"'+this.frases[numeroAleatorio]+'"',
+        img: require('./src/biscoito.png')
+      })
+
+    }, 6000)
+
+
     
-        <Image 
-        source={require('./src/biscoito.png')}
-        style={styles.img}
-         />
 
-        <Text style={styles.textoFrase}>"Alguma frase aqui "</Text>
-        <TouchableOpacity style={styles.botao}>
-          <View style={styles.area}>
-            <Text style={styles.texto}>Sortear</Text>
-          </View>
-        </TouchableOpacity>
-    </View>
-  );
+
+  };
+
+  render(){
+    return (
+      <View style={styles.container}>
+      
+          <Image 
+          source={this.state.img}
+          style={styles.img}
+           />
+  
+          <Text style={styles.textoFrase}>{this.state.palavra}</Text>
+          <TouchableOpacity style={styles.botao} onPress={() => this.sortear()}>
+            <View style={styles.btnArea}>
+              <Text style={styles.btnTexto}>Sortear</Text>
+            </View>
+          </TouchableOpacity>
+      </View>
+    );
+
+  }
 }
-
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -43,15 +89,16 @@ const styles = StyleSheet.create({
     height:50,
     borderWidth:2,
     borderColor: '#dd7b22',
-    borderRadius: 25 
+    borderRadius: 25,
+    //display: 'none'
   },
-  area:{
+  btnArea:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
     
   },
-  texto:{
+  btnTexto:{
     color: '#dd7b22',
     fontSize:20,
     fontWeight: 'bold'
@@ -65,3 +112,7 @@ const styles = StyleSheet.create({
   }
 
 });
+
+export default App;
+
+
