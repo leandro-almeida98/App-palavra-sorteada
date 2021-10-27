@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
+import {LinearGradient} from 'expo-linear-gradient';
 import { 
   StyleSheet, 
   Text, 
@@ -54,26 +55,37 @@ class App extends Component{
 
   render(){
     return (
-      <View style={styles.container}>
-      
-          <Image 
-          source={this.state.img}
-          style={styles.img}
-           />
-  
-          <Text style={styles.textoFrase}>{this.state.palavra}</Text>
-          <TouchableOpacity style={styles.botao} onPress={() => this.sortear()}>
-            <View style={styles.btnArea}>
-              <Text style={styles.btnTexto}>Sortear</Text>
-            </View>
-          </TouchableOpacity>
-      </View>
+      <LinearGradient start={{x: 1, y: 0}} end={{x: 1, y: 1}} colors={['#120BD9', '#0810A6', '#0810A6', '#0A13BF']} style={styles.linearGradient}>
+        {/* <View style={styles.container}> */}
+        
+        <Image
+        source={this.state.img}
+        style={styles.img}
+        />
+
+        <Text style={styles.textoFrase}>{this.state.palavra}</Text>
+        <TouchableOpacity style={styles.botao} onPress={() => this.sortear()}>
+          <View style={styles.btnArea}>
+            <Text style={styles.btnTexto}>Sortear</Text>
+          </View>
+        </TouchableOpacity>
+    {/* </View> */}
+      </LinearGradient>
     );
 
   }
 }
 const styles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop:35,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
 
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
