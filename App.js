@@ -15,37 +15,49 @@ class App extends Component{
       palavra: '',
       img: require('./src/biscoito.png')
     }
+    this.timer = null;
     this.frases = [
-      'Viver é a coisa mais rara do mundo. A maioria das pessoas apenas existe.',
-      'Não existe um caminho para a felicidade. A felicidade é o caminho.',
-      'O que sabemos é uma gota; o que ignoramos é um oceano.',
-      'Muitas pessoas perdem as pequenas alegrias enquanto aguardam a grande felicidade.',
-      'Feliz aquele que transfere o que sabe e aprende o que ensina.',
-      'Para mim, a capacidade de sorrir é uma das mais belas características do ser humano.',
-      'A persistência é o caminho do êxito.',
-      'Se apaixone pela sua existência.',
-      'O fraco jamais perdoa: o perdão é uma das características do forte.'
+      'Viver',
+      'existir ',
+      'oceano.',
+      'alegria',
+      'ensina.',
+      'sorrir',
+      'persistência',
+      'apaixonar',
+      'sentir',
+      'realizar',
+      'sobreviver',
+      'resistir',
+      'sortear',
+      'experimentar',
+      'perdoar:'
     ]
     this.sortear = this.sortear.bind(this);
   }
 
   sortear(){
-    // alert('teste');
-    let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
-    this.setState({
-      img: require('./src/loading.gif') 
-    })
-    // setTimeout(() => {
-      
-    // }, 3000)
-
-    setTimeout(() => {
+    
+    
+    let numeroAleatorio = null;
+    if(this.timer != null){
+      // parar o timer
+      clearInterval(this.timer);
+      this.timer = null;
       this.setState({
-        palavra: '"'+this.frases[numeroAleatorio]+'"',
-        img: require('./src/biscoito.png')
+        img: require('./src/biscoitoAberto.png')
       })
-
-    }, 6000)
+    }else{
+      this.setState({
+        img: require('./src/loading.gif')
+      })
+      this.timer = setInterval(()=> {
+        numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+        this.setState({
+          palavra: '"'+this.frases[numeroAleatorio]+'"',
+        })
+      }, 10);
+    }
 
 
     
